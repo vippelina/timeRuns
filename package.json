@@ -1,0 +1,21 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "Work sample for Auddly",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://vippe@bitbucket.org/vippe/timer.git"
+  },
+  "keywords": [
+    "timer"
+  ],
+  "author": "Vibeke Tengroth",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/vippe/timer#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.12.4",
+    "path": "^0.12.7"
+  }
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="Timer">
+<head>
+	<title></title>
+	<script src="./bower_components/angular/angular.js"></script><!-- load angular -->
+	<script type="text/javascript" src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	
+ 	<script type="text/javascript" src="/controllers.js"></script>
+ 	<script type="text/javascript" src="/services.js"></script>
+ 	<script type="text/javascript" src="/directives.js"></script>
+ 	<script type="text/javascript" src="/config.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+ 	<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+</head>
+<body>
+	<div class='container'>	 
+	 	<div ui-view='previousRuns' class='start view'></div>
+	 	<div ui-view='newRun'></div>
+	</div><!--container-fluid-->
+</body>
+</html>

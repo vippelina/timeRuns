@@ -1,0 +1,13 @@
+<div class="prevRuns section">
+	<h2>Previous runs</h2>
+	<p ng-show="!prevRuns">You have no previous runs yet</p>
+	<div class="run" ng-repeat="run in prevRuns">
+		<p><span class="label">When</span>{{run.name}}</p>
+		<p><span class="label">Total time</span>{{run.totalTime}}</p>
+		<ul>
+			<li ng-repeat="lap in run.laps track by $index">
+				{{lap.time}}
+			</li>
+		</ul>
+	</div>
+</div>

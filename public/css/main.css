@@ -1,0 +1,17 @@
+/***************************/
+/*General
+/****************************/
+body{
+	color: #70B5FB;
+    background: black;
+    /* vertical-align: middle; */
+    position: relative;
+    letter-spacing: 1pt;
+}
+.section{
+	width: auto;
+}
+.container{
+    margin: 0 auto;
+    text-align: center;
+}
