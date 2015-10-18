@@ -58,6 +58,7 @@ directives.timer = function($interval, RunService, $filter){
 				calculateLap(Timer.now);
 				$interval.cancel(timePromise);
 				stoppedTime = angular.copy(scope.totalTime);
+				scope.timerOn = false;
 			}
 
 			scope.newRun = function(){
