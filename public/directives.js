@@ -19,6 +19,7 @@ directives.timer = function($interval, RunService, $filter){
 			scope.timerOn = false;
 			scope.totalTime = 0;
 			scope.laps = [];
+			scope.runIsFinished = false;
 			
 			var timePromise;
 			var incrementTimer = function(){
@@ -57,8 +58,9 @@ directives.timer = function($interval, RunService, $filter){
 			scope.finishRun = function(){
 				calculateLap(Timer.now);
 				$interval.cancel(timePromise);
-				stoppedTime = angular.copy(scope.totalTime);
+				Timer.stoppedTime = angular.copy(scope.totalTime);
 				scope.timerOn = false;
+				scope.runIsFinished = true;
 			}
 
 			scope.newRun = function(){
@@ -81,6 +83,9 @@ directives.timer = function($interval, RunService, $filter){
 
 			var calculateLap = function(timeStamp){
 				var total = timeStamp - Timer.startTime;
+				if(Timer.stoppedTime){
+					total = scope.totalTime;
+				}
 				var totalLapsTime = 0;
 				//loop through eventual previous laps time
 				for (var i = 0; i < scope.laps.length; i++) {
@@ -101,6 +106,9 @@ directives.timer = function($interval, RunService, $filter){
 				scope.laps = [];
 				Timer.reset();
 			}
+
+			//when calculating lap räknar vi totalen som tiden som blir när man tar nu minus starttiden. Men om man har stoppat så 
+			//så bprde det bli den totala tiden 
 		}	            
 	}
 }
