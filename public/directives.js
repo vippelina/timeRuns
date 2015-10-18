@@ -15,7 +15,6 @@ directives.timer = function($interval, RunService, $filter){
 					now = null;
 				}
 			}
-
 			scope.timerOn = false;
 			scope.totalTime = 0;
 			scope.laps = [];
@@ -77,7 +76,6 @@ directives.timer = function($interval, RunService, $filter){
 
 					RunService.addRun(run);
 				}
-
 				reset();
 			}
 

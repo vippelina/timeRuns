@@ -1,14 +1,14 @@
 <div class="timer">
-	<p class="totalTime" ng-model="totalTime">{{totalTime}}</p>
-	<button class="start" ng-click="startTimer()">Start</button>
-	<button class="stop" ng-click="stopTimer()">Pause</button>
-	<button class="stop" ng-click="finishRun()">Finish run</button>
-	<button class="reset" ng-click="resetTimer()" ng-disabled="timerOn">Reset</button>
-	<button class="lap" ng-click="lapMark()" ng-disabled="!timerOn">Lap</button>
-	<button class="newRun" ng-click="newRun()" ng-disabled="!timerOn">New Run</button>
+	<p class="totalTime" ng-model="totalTime">{{totalTime | formatMS}}</p>
+	<button class="start btn" ng-click="startTimer()">Start</button>
+	<button class="stop btn" ng-click="stopTimer()">Pause</button>
+	<button class="stop btn" ng-click="finishRun()">Finish run</button>
+	<button class="reset btn" ng-click="resetTimer()" ng-disabled="timerOn">Reset</button>
+	<button class="lap btn" ng-click="lapMark()" ng-disabled="!timerOn">Lap</button>
+	<button class="newRun btn" ng-click="newRun()" ng-disabled="!timerOn">New Run</button>
 	<ul class="laps">
 		<li ng-repeat="lap in laps track by $index">
-			<p>Varv {{$index+1}}:  {{lap.time}}</p>
+			<p>Varv {{$index+1}}:  {{lap.time | formatMS}}</p>
 		</li>
 	</ul>
 </div>

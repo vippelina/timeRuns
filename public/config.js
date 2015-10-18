@@ -27,26 +27,26 @@ Timer.config(function($urlRouterProvider, $stateProvider, $httpProvider){
 // Run
 //***************************************************
 Timer.run(function(){
-	console.log("running");
+
 })
 
-Timer.filter('formatTime', function() {
+Timer.filter('formatMS', function() {
     //Returns duration from milliseconds in hh:mm:ss format.
-      return function(millseconds) {
-      	console.log("got millseconds", millseconds);
-        var seconds = Math.floor(millseconds / 1000);
-        console.log("seconds", seconds);
-        var h = 3600;
-        var m = 60;
-        var hours = Math.floor(seconds/h);
-        var minutes = Math.floor( (seconds % h)/m );
-        var scnds = Math.floor( (seconds % m) );
-        var timeString = '';
-        if(scnds < 10) scnds = "0"+scnds;
-        if(hours < 10) hours = "0"+hours;
-        if(minutes < 10) minutes = "0"+minutes;
-        timeString = hours +":"+ minutes +":"+scnds;
-        return timeString;
+      return function(input) {
+	 	//1. räkna ut millisekunderna
+	 	var ms = input % 1000; // här kan det aldrig bli decimaler
+	 	var s = Math.floor(input/1000 % 60);
+	 	var min = Math.floor((input/(1000*60))%60);
+	 	var h = Math.floor(input/(1000*60*60) % 24);
+
+	 	if(ms < 10) ms = "00"+ms;
+	 	if(ms > 10 && ms < 100) ms = "0"+ms;
+	 	if(s < 10) s = "0"+s;
+		if(min < 10) min = "0"+min;
+		if(h < 10) h = "0"+h;
+	 	var str = h + ":" + min + ":" + s + ":" + ms;
+
+	 	return str;       
     }
 });
 //********************************************************************

@@ -14,9 +14,9 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//----------------------------------------
+//-------------------------------------------
 //Run server
-//----------------------------------------
+//-------------------------------------------
 app.listen(app.get('port'), function(){
 	console.log("Server is running on port ", app.get('port'));
 });
