@@ -1,3 +1,5 @@
-*~
-node_modules
-.DS_Store
+node-express# cat > .gitignore <<EOT 
+node_modules/
+.gitignore
+EOT
+.elasticbeanstalk/

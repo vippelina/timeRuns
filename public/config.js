@@ -27,7 +27,7 @@ Timer.config(function($urlRouterProvider, $stateProvider, $httpProvider){
 // Run
 //***************************************************
 Timer.run(function(){
-
+ console.log("angular is running");
 })
 
 Timer.filter('formatMS', function() {
