@@ -2,12 +2,12 @@
 	<p class="totalTime" ng-model="totalTime">{{totalTime | formatMS}}</p>
 	<p class="totalLapTime" ng-model="totalLapTime">{{totalLapTime | formatMS}}</p>
 	<!-- start stop -->
-	<button class="btn" ng-click="startStopTimer()">
+	<button class="btn btn-default" ng-click="startStopTimer()">
 		<span ng-show="!timerOn">Start</span>
 		<span ng-show="timerOn">Stop</span>
 	</button>
 	<!-- lap reset -->
-	<button class="btn" ng-click="newLapOrReset()">
+	<button class="btn btn-default" ng-click="newLapOrReset()">
 		<span ng-show="timerOn">New Lap</span>
 		<span ng-show="!timerOn">Reset</span>
 	</button>
