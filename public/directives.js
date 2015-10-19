@@ -16,27 +16,45 @@ directives.timer = function($interval, RunService, $filter){
 				}
 			}
 
+			var LapTimer = {
+				startTime: 0,
+				stoppedTime: null,
+				now: null,
+				newLap: function(){
+					this.startTime = 0;
+					this.stoppedTime = null;
+					now = null;
+				}
+			}
+
 			scope.timerOn = false;
 			scope.totalTime = 0;
+			scope.totalLapTime = 0;
+			scope.lapTimerOn = false;
 			scope.laps = [];
 			scope.runIsFinished = false;
 			
 			var timePromise; //used for keeping track of the timeout fn
 
-			var incrementTimer = function(){
+			var incrementTimers = function(){
 				Timer.now = Date.now();
+				//increment mainTimer
 				if(!Timer.stoppedTime){
+					console.log("no stopped time");
 					scope.totalTime = Timer.now - Timer.startTime;
 		  		}else{
 		  			scope.totalTime = (Timer.now-Timer.startTime) + Timer.stoppedTime;
 		  		}
+
+		  		//increment lapTimer
+		  		scope.totalLapTime = Timer.now - LapTimer.startTime;
 			}
 
 			scope.startStopTimer = function(){
 				if(scope.timerOn){
-					stopTimer();
+					stopTimers();
 				}else{
-					startTimer();
+					startTimers();
 				}
 			}
 
@@ -91,19 +109,22 @@ directives.timer = function($interval, RunService, $filter){
 				Timer.reset();
 			}
 
-			var startTimer = function(){
-				Timer.startTime = Date.now();
+			var startTimers = function(timeStamp){
 				timePromise = $interval(function(){
-				incrementTimer();
+				incrementTimers();
 				}, 1);
 				scope.timerOn = true;
 			}
 
-			var stopTimer = function(){
+			var startLapTimer = function(timeStamp){
+				LapTimer.startTime = Date.now();
+			}
+
+			var stopTimers = function(){
 				$interval.cancel(timePromise);
 				Timer.stoppedTime = angular.copy(scope.totalTime);
-				calculateLap(Timer.now);
 				scope.timerOn = false;
+				scope.lapTimerOn = false;//do we need this?
 			}
 
 			//when calculating lap räknar vi totalen som tiden som blir när man tar nu minus starttiden. Men om man har stoppat så 

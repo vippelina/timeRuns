@@ -1,5 +1,6 @@
 <div class="timer">
 	<p class="totalTime" ng-model="totalTime">{{totalTime | formatMS}}</p>
+	<p class="totalLapTime" ng-model="totalLapTime">{{totalLapTime | formatMS}}</p>
 	<!-- start stop -->
 	<button class="btn" ng-click="startStopTimer()">
 		<span ng-show="!timerOn">Start</span>
