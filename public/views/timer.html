@@ -1,6 +1,6 @@
 <div class="timer">
 	<p class="totalTime" ng-model="totalTime">{{totalTime | formatMS}}</p>
-	<button class="start btn" ng-click="startTimer()">Start</button>
+	<button class="start btn" ng-click="startPauseTimer()">Start/Pause</button>
 	<button class="stop btn" ng-click="stopTimer()">Pause</button>
 	<button class="stop btn" ng-click="finishRun()">Finish run</button>
 	<button class="reset btn" ng-click="resetTimer()" ng-disabled="timerOn">Reset</button>
