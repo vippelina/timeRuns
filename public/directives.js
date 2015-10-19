@@ -15,13 +15,14 @@ directives.timer = function($interval, RunService, $filter){
 					now = null;
 				}
 			}
+
 			scope.timerOn = false;
 			scope.totalTime = 0;
 			scope.laps = [];
 			scope.runIsFinished = false;
 			
-			var timePromise;
-			
+			var timePromise; //used for keeping track of the timeout fn
+
 			var incrementTimer = function(){
 				Timer.now = Date.now();
 				if(!Timer.stoppedTime){
@@ -31,30 +32,20 @@ directives.timer = function($interval, RunService, $filter){
 		  		}
 			}
 
-			scope.startPauseTimer = function(){
+			scope.startStopTimer = function(){
 				if(scope.timerOn){
-					pauseTimer();
+					stopTimer();
 				}else{
 					startTimer();
 				}
 			}
 
-			scope.resetTimer = function(){
-				reset();
-			}
-
-			scope.lapMark = function(){
+			scope.lapOrReset = function(){
 				if(scope.timerOn){
 					calculateLap(Date.now());
+				}else{
+					reset();
 				}
-			}
-
-			scope.finishRun = function(){
-				calculateLap(Timer.now);
-				$interval.cancel(timePromise);
-				Timer.stoppedTime = angular.copy(scope.totalTime);
-				scope.timerOn = false;
-				scope.runIsFinished = true;
 			}
 
 			scope.newRun = function(){
@@ -108,9 +99,10 @@ directives.timer = function($interval, RunService, $filter){
 				scope.timerOn = true;
 			}
 
-			var pauseTimer = function(){
+			var stopTimer = function(){
 				$interval.cancel(timePromise);
 				Timer.stoppedTime = angular.copy(scope.totalTime);
+				calculateLap(Timer.now);
 				scope.timerOn = false;
 			}
 
