@@ -22,6 +22,8 @@ Timer.config(function($urlRouterProvider, $stateProvider, $httpProvider){
 				}
 			}
 		});
+
+	$urlRouterProvider.otherwise('/');	
 })
 //***************************************************
 // Run
