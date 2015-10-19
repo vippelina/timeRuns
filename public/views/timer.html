@@ -20,7 +20,7 @@
  
 	<ul class="laps">
 		<li ng-repeat="lap in laps | orderBy: '-nr' ">
-			<p><span class="myLabel">Varv {{lap.nr}}</span>{{lap.time | formatMS}}</p>
+			<p><span class="myLabel">Lap {{lap.nr}}</span>{{lap.time | formatMS}}</p>
 		</li>
 	</ul>
 </div>
