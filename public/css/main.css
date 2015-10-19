@@ -3,7 +3,7 @@
 /****************************/
 body{
 	color: #FF00A5;
-    background: black;
+    background: #252525;
     /* vertical-align: middle; */
     position: relative;
     letter-spacing: 1pt;
@@ -35,7 +35,7 @@ body{
     /* padding: 24px 34px; */
     width: 113px;
     height: 80px;
-    color: #272727;
+    color: #FBFF02;
     background: #FF00A5;
     border-color: #FF00A5;
     border: 0;
@@ -45,13 +45,10 @@ body{
 	text-transform: lowercase;
 }
 
-.btnGroup .button{
+.btnGroup .button.left{
 	margin-right: 20px;
 }
-.btnGroup .button:last-child{
-	margin-right: 0px;
-}
-
+ 
 .section.newRun{
 	padding-top: 50px;
 }

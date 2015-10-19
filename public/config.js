@@ -26,8 +26,15 @@ Timer.config(function($urlRouterProvider, $stateProvider, $httpProvider){
 //***************************************************
 Timer.run(function(){
  console.log("angular is running");
+ //angular is running
 })
 
+//***************************************************
+// Filters
+//***************************************************
+//----------------------------------------
+//Format milliseconds to hh:mm:ss:mss
+//----------------------------------------
 Timer.filter('formatMS', function() {
     //Returns duration from milliseconds in hh:mm:ss format.
       return function(input) {
@@ -38,7 +45,7 @@ Timer.filter('formatMS', function() {
 	 	var h = Math.floor(input/(1000*60*60) % 24);
 
 	 	if(ms < 10) ms = "00"+ms;
-	 	if(ms > 10 && ms < 100) ms = "0"+ms;
+	 	if(ms >= 10 && ms < 100) ms = "0"+ms;
 	 	if(s < 10) s = "0"+s;
 		if(min < 10) min = "0"+min;
 		if(h < 10) h = "0"+h;
