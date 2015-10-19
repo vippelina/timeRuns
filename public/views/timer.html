@@ -15,8 +15,8 @@
 	</div>
  
 	<ul class="laps">
-		<li ng-repeat="lap in laps track by $index">
-			<p>Varv {{$index+1}}:  {{lap.time | formatMS}}</p>
+		<li ng-repeat="lap in laps track by $index ">
+			<p><span class="myLabel">Varv {{$index+1}}</span>{{lap.time | formatMS}}</p>
 		</li>
 	</ul>
 </div>
