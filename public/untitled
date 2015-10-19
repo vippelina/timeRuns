@@ -5,44 +5,46 @@ directives.timer = function($interval, RunService, $filter){
 		restrict: 'E',
 		templateUrl: '/views/timer.html',
 		link: function(scope, elm, attrs){
-			var START = null;
-			var LAPSTART = null;
-			var STOP = null;
-			var TOTALTIME = 0;
+			var Timer = {
+				startTime: 0,
+				stoppedTime: null,
+				now: null,
+				reset: function(){
+					this.startTime = 0;
+					this.stoppedTime = null;
+					now = null;
+				}
+			}
+
+			
 
 			scope.timerOn = false;
 			scope.totalTime = 0;
-			scope.totalLapTime = 0;
 			scope.laps = [];
 			scope.runIsFinished = false;
-			var count = 0;
 			
 			var timePromise; //used for keeping track of the timeout fn
 
 			var incrementTimer = function(){
-				var now = Date.now();
- 
-				if(!STOP){
-					scope.totalTime = now - START;
+				Timer.now = Date.now();
+				if(!Timer.stoppedTime){
+					scope.totalTime = Timer.now - Timer.startTime;
 		  		}else{
-		  			scope.totalTime = (now-START) + TOTALTIME;
+		  			scope.totalTime = (Timer.now-Timer.startTime) + Timer.stoppedTime;
 		  		}
-		  		scope.totalLapTime = now - LAPSTART;
-
-		  		count++;
 			}
-		  		
+
 			scope.startStopTimer = function(){
 				if(scope.timerOn){
-					stopTimers();
+					stopTimer();
 				}else{
-					startTimers();
+					startTimer();
 				}
 			}
 
-			scope.newLapOrReset = function(){
+			scope.lapOrReset = function(){
 				if(scope.timerOn){
-					saveLap(Date.now());
+					calculateLap(Date.now());
 				}else{
 					reset();
 				}
@@ -65,54 +67,47 @@ directives.timer = function($interval, RunService, $filter){
 				reset();
 			}
 
-			var saveLap = function(timeStamp){
- 				var lap = timeStamp - LAPSTART;
- 				scope.laps.push({time: lap});
- 				LAPSTART = timeStamp;
- 				scope.totalLapTime = 0;
+			var calculateLap = function(timeStamp){
+				var total = timeStamp - Timer.startTime;
+				if(Timer.stoppedTime){
+					total = scope.totalTime;
+				}
+				var totalLapsTime = 0;
+				//loop through eventual previous laps time
+				for (var i = 0; i < scope.laps.length; i++) {
+					totalLapsTime += scope.laps[i].time;
+				};
 
-
- 
-			
+				var lap = total - totalLapsTime;
+				//don't save an empty value if nothing has happened
+				if(lap == 0){
+					return;
+				}
+				scope.laps.push({time: lap});
 			}
 
 			var reset = function(){
-				START = null;
-				LAPSTART = null;
-				STOP = null;
-				TOTALTIME = 0;
-
-				scope.timerOn = false;
 				scope.totalTime = 0;
-				scope.totalLapTime = 0;
+				scope.lapTime = 0;
 				scope.laps = [];
-				scope.runIsFinished = false;
-				count = 0;
-				
-				timePromise = null;
+				Timer.reset();
 			}
 
-			var startTimers = function(){
- 				var d = Date.now();
- 				START = d;
- 				LAPSTART = d;
- 				timePromise = $interval(function(){
+			var startTimer = function(){
+				Timer.startTime = Date.now();
+				timePromise = $interval(function(){
 				incrementTimer();
 				}, 1);
 				scope.timerOn = true;
 			}
 
-			var stopTimers = function(){
-				STOP = Date.now();
+			var stopTimer = function(){
 				$interval.cancel(timePromise);
-				var interval = STOP - START;
-				TOTALTIME = TOTALTIME + interval;
-				saveLap(STOP);
-				scope.timerOn = false;
-				scope.totalTime = TOTALTIME;
-			}
 
-	 
+				Timer.stoppedTime = angular.copy(scope.totalTime);
+				calculateLap(Timer.now);
+				scope.timerOn = false;
+			}
 
 			//when calculating lap räknar vi totalen som tiden som blir när man tar nu minus starttiden. Men om man har stoppat så 
 			//så bprde det bli den totala tiden 
