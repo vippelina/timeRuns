@@ -12,10 +12,6 @@ Timer.config(function($urlRouterProvider, $stateProvider, $httpProvider){
 		.state('start', {
 			url: '/',
 			views: {
-				'previousRuns': {
-					templateUrl: '/views/prevRuns.html',
-					controller: 'prevRunsController'
-				},
 				'newRun': {
 					templateUrl: '/views/newRun.html',
 					controller: 'newRunController'

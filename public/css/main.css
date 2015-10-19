@@ -2,11 +2,12 @@
 /*General
 /****************************/
 body{
-	color: #70B5FB;
+	color: #FF00A5;
     background: black;
     /* vertical-align: middle; */
     position: relative;
     letter-spacing: 1pt;
+    font-family: 'Roboto';
 }
 .section{
 	width: auto;
@@ -14,4 +15,55 @@ body{
 .container{
     margin: 0 auto;
     text-align: center;
+}
+
+.totalTime{
+	font-size: 34px;
+}
+
+.totalLapTime{
+	font-size: 18px;
+}
+
+.btnGroup{
+	margin-top: 20px;
+}
+
+.btn-default{
+
+}
+
+.button{
+    font-size: 20px;
+    /* padding: 24px 34px; */
+    width: 113px;
+    height: 80px;
+    color: #272727;
+    background: #FF00A5;
+    border-color: #FF00A5;
+    border: 0;
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-transform: lowercase;
+}
+
+.btnGroup .button{
+	margin-right: 20px;
+}
+.btnGroup .button:last-child{
+	margin-right: 0px;
+}
+
+.section.newRun{
+	padding-top: 50px;
+}
+
+ul.laps{
+	width: 400px;
+    margin: 0 auto;
+    list-style-type: none;
+    padding-left: 0px;
+    font-size: 18px;
+    margin-top: 20px;
 }
